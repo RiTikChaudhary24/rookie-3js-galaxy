@@ -3,6 +3,10 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import GUI from 'lil-gui'
 import { color, mix } from 'three/tsl'
 
+import starTextSrc from "./textures/circle_05.png";
+import bigStarSrc from "./textures/star_01.png";
+import centerLineSrc from "./textures/flare_01.png";
+import centerPointSrc from "./textures/smoke_04.png";
 
 const gui = new GUI()
 
@@ -11,10 +15,10 @@ const canvas = document.querySelector('canvas.webgl')
 const scene = new THREE.Scene()
 
 const textureLoader = new THREE.TextureLoader();
-const starText = textureLoader.load("/textures/circle_05.png")
-const bigStarText = textureLoader.load("/textures/star_01.png")
-const centerLineText = textureLoader.load("/textures/flare_01.png")
-const centerPointText = textureLoader.load("/textures/flame_04.png")
+const starText = textureLoader.load(starTextSrc)
+const bigStarText = textureLoader.load(bigStarSrc)
+const centerLineText = textureLoader.load(centerLineSrc)
+const centerPointText = textureLoader.load(centerPointSrc)
 
 
 let galaxyMaterial ;
