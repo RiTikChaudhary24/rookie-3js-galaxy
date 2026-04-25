@@ -20,6 +20,43 @@ const bigStarText = textureLoader.load(bigStarSrc)
 const centerLineText = textureLoader.load(centerLineSrc)
 const centerPointText = textureLoader.load(centerPointSrc)
 
+//---------------------------------
+const starGeo = new THREE.BufferGeometry();
+const skyStarCount = 1000;
+const skyStarPosition = new Float32Array(skyStarCount * 3);
+
+for (let i=0; i< skyStarCount; i++){
+    let i3 = i * 3;
+
+    skyStarPosition[i3+0] = (Math.random() - 0.5 ) * 100;
+    skyStarPosition[i3+1] = (Math.random() - 0.5 ) * 100
+    skyStarPosition[i3+2] = (Math.random() - 0.5 ) * 100
+
+}
+
+starGeo.setAttribute(
+    "position",
+    new THREE.BufferAttribute(skyStarPosition, 3)
+);
+
+const starMat = new THREE.PointsMaterial({
+        size: 0.23,
+        sizeAttenuation: true,
+        depthWrite : false,
+        blending : THREE.AdditiveBlending,
+        alphaMap : starText,
+        transparent : true,
+    })
+
+const starMesh = new THREE.Points(
+    starGeo,
+    starMat
+)
+
+
+scene.add(starMesh);
+
+//-----------------------------
 
 let galaxyMaterial ;
 let galaxyGeometry ;
@@ -263,7 +300,7 @@ const tick = () =>
         star.rotation.y -= 0.001; 
     }
     if (center) {
-        center.rotation.y += 0.1; 
+        center.rotation.y += 0.5; 
     }
     center.scale.setScalar(1 + Math.sin(elapsedTime) * 0.2);
     // centerPoint.position.y = 2;
